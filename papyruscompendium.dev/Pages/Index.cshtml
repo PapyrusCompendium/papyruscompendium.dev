@@ -5,5 +5,77 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome to my portfolio page</h1>
+    <h2 class="display-4">About me</h2>
+    <p>
+        If you would like a more brief overview of my profile please reference to my submitted resume, as this portfolio is meant to be an in depth
+        description of my skillset and competencies.
+        Hello there! First let me introduce myself. I am Full Stack engineer with 5 years of professional work experience writing C# .Net.
+        I have worked in financial field developing user automation in the mortgage industry for 2 years.
+        I have worked as a professional independent freelance developer for 3 years. I love learning and working with bleeding edge technology in
+        the Microsoft stack of technologies.
+        I have been learning software development since 2013. I strive for readability and code efficiency.
+        I make it a point to always write even more bullet proof code each time I sit in front of my IDE.
+        I see an incredible amount of value in unit testing my code, and following a Test Driven Development workflow!
+        I have professional experiance leading ceremonial agile meetings. I enjoy being a team leader and mentoring other team-mates.
+        I find there is much value to be had in learning from your team-mates and taking the time to understand everyone's feedback carefully.
+    </p>
+
+    <hr />
+
+    <h2 class="display-4">Azure Platform Experience</h2>
+    <p>
+        I have many years of experience using the Azure platform in a professional capacity. Azure Kubernetes service, or AKS, was a major component
+        in our user automation projects. I have hands on experience configuring CI/CD piplines to deploy into AKS.
+        One particular project I enjoyed building, independently, was an OCR service that required Azure Cognitive services.
+        I have expert experience using Azure Appconfig, and Azure Keyvault services.
+        I have configured Appconfig, and keyvault services to run on multiple environments to allow for testing in local, development, and production environments.
+        I am very familiar with Azure Devops and all of it's sub features including Wiki, Repos, Pipelines, and Boards.
+        I am most comfortable working in Devops configured for Agile workflow.
+        <br />
+    </p>
+
+    <h3>Azure Cog, OCR Project details:</h3>
+    <p>
+        The synopsis of this project was to design a service that could identify and accurately read text fields in mortgage documents.
+        The challenge here, was that the documents did not follow a single standard, as each state has different layouts for the aforementioned documents.
+        So my solution was to use Azure Cognitive services to identify desirable fields located somewhere inside of these submitted documents.
+        I designed this service to function as an independent microservice that would respond to queue messages on our service bus layer.
+        Through this project I gained hands on experience training, and developing a cognitive service within C# .Net.
+    </p>
+
+    <hr />
+
+    <h2 class="display-4">C# .Net Experience</h2>
+    <p>
+        C# is my strongest suited language and also the first language I started coding with.
+        I have been studying C# .net since 2013 when I began an unmatched interest in computer programming.
+        I have written many projects using C# .net and I know the language inside and out.
+        I have expanded my usage of C# with recent advancements of the language making it cross platform compatible.
+        Some technologies I have used with C# include but are not limited to; Blazor, Asp.net CORE, EFcore, Docker, AKS, Helm deployments, Seriog and Nlog,
+        ELK stack, Core AND Framework, Winform, GDI+, WPF, Xunit and Nunit testing frameworks.
+    </p>
 </div>
+
+<pre><code class="language-csharp hljs">
+using System.Drawing;
+using System.Text;
+
+using Xunit;
+namespace Steganography
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var encodedMessage = "This is an encoded message";
+            var stegoImage = new SteganographicImage(new Bitmap(Image.FromFile("TestImage.png")));
+            var encodedImage = stegoImage.EncodeDataInBitmap(Encoding.UTF8.GetBytes(encodedMessage));
+
+            stegoImage = new SteganographicImage(encodedImage);
+            var encodedData = stegoImage.GetEncodedDataFromBitmap();
+
+            Assert.Equal(encodedMessage, Encoding.UTF8.GetString(encodedData));
+        }
+    }
+}
+</code></pre>
