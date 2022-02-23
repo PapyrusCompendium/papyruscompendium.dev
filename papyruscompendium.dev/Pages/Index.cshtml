@@ -31,6 +31,8 @@
         I have configured Appconfig, and keyvault services to run on multiple environments to allow for testing in local, development, and production environments.
         I am very familiar with Azure Devops and all of it's sub features including Wiki, Repos, Pipelines, and Boards.
         I am most comfortable working in Devops configured for Agile workflow.
+        I have experience maintaining and building Azure SQL servers using EFcore(ORM) code first, and Db first.
+        I also have work experience developing API servers with asp net core.
         <br />
     </p>
 
@@ -53,6 +55,69 @@
         I have expanded my usage of C# with recent advancements of the language making it cross platform compatible.
         Some technologies I have used with C# include but are not limited to; Blazor, Asp.net CORE, EFcore, Docker, AKS, Helm deployments, Seriog and Nlog,
         ELK stack, Core AND Framework, Winform, GDI+, WPF, Xunit and Nunit testing frameworks.
+        I always utilize key principals like, SOLID, DRY, and KISS when I develop software.
+    </p>
+</div>
+
+
+<div class="text-center">
+    <h3>Aes Project</h3>
+    <p>
+        Project Source: <a href="https://github.com/PapyrusCompendium/AESinIL">https://github.com/PapyrusCompendium/AESinIL</a><br />
+        The below is a project is something I decided to develop out of a curiosity of Microsoft's Common Language Runtime(CLR).
+        I wanted to learn more about the inner workings of C# and what it was compiled to.
+        Learning this has brought many advantages to coding the higher level implementation, C#.
+        I believe after learning how Common Intermediate Language(CIL) worked I am more capable of developing systems with greater interoperability.
+        Below are some snippets of the CIL I wrote by hand;
+    </p>
+</div>
+
+<p>Entry point IL code</p>
+<pre><code class="hljs">
+.method public hidebysig static void Main(string[] args) cil managed
+{
+    .maxstack 2
+    .entrypoint
+    .locals init(
+        [0] string,
+        [1] string
+    )
+
+    ldstr       "AES in IL, I wrote this simply to practice more with writing in IL."
+    call        void [mscorlib]System.Console::WriteLine(string)
+
+    ldstr       "Password: "
+    call        void [mscorlib]System.Console::Write(string)
+            
+    call        string [mscorlib]System.Console::ReadLine()
+    stloc.0     // Load the password to our locals.
+
+    ldstr       "Plain Text: "
+    call        void [mscorlib]System.Console::Write(string)
+
+    call        string [mscorlib]System.Console::ReadLine()
+    stloc.1     // Load the plaintext into our locals.
+
+    ldstr       "Encrypting..."
+    call        void [mscorlib]System.Console::WriteLine(string)
+
+    ldloc.1
+    ldloc.0
+    call        void AESinIL.Cryptography::RoundTrip(string, string)
+    ret
+}
+</code></pre>
+
+<div class="text-center">
+    <h3>Steganography Project</h3>
+    <p>
+        Project Source: <a href="https://github.com/PapyrusCompendium/Steganography-Library">https://github.com/PapyrusCompendium/Steganography-Library</a><br />
+        Below is a project I developed out of an interest in working with data in obscure ways.
+        I wanted to develop a library that would quickly, and efficiently encode data into an image without changing the look of the image.
+        After researching a few techniques of doing this, I decided I would solve this task by encoding data into the least significant bit(LSB).
+        Since PNG graphics encode each pixel exactly as it was created we can utilize this property to store data inside of small changes in each pixel.
+        This method would not work in other graphic formats like jpg, because of the way they optimize the storage for smaller data sizes.
+        Below is an example use case of this library in its intended use case;
     </p>
 </div>
 
@@ -74,6 +139,7 @@ namespace Steganography
             stegoImage = new SteganographicImage(encodedImage);
             var encodedData = stegoImage.GetEncodedDataFromBitmap();
 
+            // The data from it's original format should match the decoded data.
             Assert.Equal(encodedMessage, Encoding.UTF8.GetString(encodedData));
         }
     }
