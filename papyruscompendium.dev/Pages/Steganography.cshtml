@@ -1,0 +1,36 @@
+﻿@page
+@model papyruscompendium.dev.Pages.SteganographyModel
+@{
+    var action = Request.Query["Action"];
+    var displayMessage = action == "Decode" ? Model.DecodedMessage : Model.Message;
+}
+
+<h2>Steganography</h2>
+<p>
+    Here I have made available an online version of my steganography tool.
+    You can find the source to this here: <a href="https://github.com/PapyrusCompendium/Steganography-Library">https://github.com/PapyrusCompendium/Steganography-Library</a>
+</p>
+
+
+<div class="align-content-center">
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" asp-for="UploadedImage" />
+        <input type="text" asp-for="Message" class="input-group-text" placeholder="Encoded Message" />
+        <input type="text" asp-for="Password" class="input-group-text" placeholder="Password" />
+        <button type="submit" formaction="?Action=Encode">
+            Encode Message
+        </button>
+
+        <button type="submit" formaction="?Action=Decode">
+            Decode Message
+        </button>
+    </form>
+
+    <hr />
+
+    <h4>Selected Image:</h4>
+    <img src="@Model.UploadedImageSource" height="500" />
+    <br />
+
+    <h4>Message: @displayMessage</h4>
+</div>
