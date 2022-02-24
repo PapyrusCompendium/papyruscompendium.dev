@@ -111,6 +111,7 @@
     <h3>Steganography Project</h3>
     <p class="text-left">
         Project Source: <a href="https://github.com/PapyrusCompendium/Steganography-Library">https://github.com/PapyrusCompendium/Steganography-Library</a><br />
+        Try Demo Version: <a href="https://papyruscompendium.dev/Steganography">https://papyruscompendium.dev/Steganography</a><br />
         Below is a project I developed out of an interest in working with data in obscure ways.
         I wanted to develop a library that would quickly, and efficiently encode data into an image without changing the look of the image.
         After researching a few techniques of doing this, I decided I would solve this task by encoding data into the least significant bit(LSB).
@@ -121,10 +122,13 @@
 </div>
 
 <pre><code class="language-csharp hljs">
-using System.Drawing;
 using System.Text;
 
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+
 using Xunit;
+
 namespace Steganography
 {
     class Program
@@ -132,11 +136,12 @@ namespace Steganography
         static void Main(string[] args)
         {
             var encodedMessage = "This is an encoded message";
-            var stegoImage = new SteganographicImage(new Bitmap(Image.FromFile("TestImage.png")));
-            var encodedImage = stegoImage.EncodeDataInBitmap(Encoding.UTF8.GetBytes(encodedMessage));
+
+            var stegoImage = new SteganographicImage(Image.Load<Rgba32>("TestImage.png"));
+            var encodedImage = stegoImage.EncodeDataInImage(Encoding.UTF8.GetBytes(encodedMessage));
 
             stegoImage = new SteganographicImage(encodedImage);
-            var encodedData = stegoImage.GetEncodedDataFromBitmap();
+            var encodedData = stegoImage.GetEncodedDataFromImage();
 
             // The data from it's original format should match the decoded data.
             Assert.Equal(encodedMessage, Encoding.UTF8.GetString(encodedData));
