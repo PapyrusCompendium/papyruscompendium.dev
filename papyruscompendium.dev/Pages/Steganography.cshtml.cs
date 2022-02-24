@@ -10,6 +10,7 @@ using System.Text;
 using SixLabors.ImageSharp.Formats;
 using SteganographyLibrary.Exceptions;
 using System.Security.Cryptography;
+using System;
 
 namespace papyruscompendium.dev.Pages
 {
@@ -33,7 +34,7 @@ namespace papyruscompendium.dev.Pages
 		public async Task OnPostAsync()
 		{
 			var action = Request.Query["Action"];
-			if (string.IsNullOrEmpty(action))
+			if (string.IsNullOrEmpty(action) || UploadedImage is null)
 			{
 				return;
 			}
@@ -43,9 +44,9 @@ namespace papyruscompendium.dev.Pages
 
 			if (action == "Encode")
 			{
-				var normalImage = new SteganographicImage(image.CloneAs<Rgba32>());
 				try
 				{
+					var normalImage = new SteganographicImage(image.CloneAs<Rgba32>());
 					var encodedImage = normalImage.EncodeDataInImage(Encoding.UTF8.GetBytes(Message), Password);
 					UploadedImageSource = encodedImage.ToBase64String(SixLabors.ImageSharp.Formats.Png.PngFormat.Instance);
 				}
@@ -53,9 +54,10 @@ namespace papyruscompendium.dev.Pages
 				{
 					Message = capacityException.Message;
 				}
-				finally
+				catch
 				{
-					UploadedImageSource = image.ToBase64String(SixLabors.ImageSharp.Formats.Png.PngFormat.Instance);
+					UploadedImageSource = string.Empty;
+					Message = "an error occured when encoding.";
 				}
 			}
 
@@ -75,6 +77,11 @@ namespace papyruscompendium.dev.Pages
 				{
 					DecodedMessage = cryptographicException.Message;
 				}
+				catch
+				{
+					DecodedMessage = "An error occured when decoding.";
+					return;
+				}
 
 				UploadedImageSource = image.ToBase64String(SixLabors.ImageSharp.Formats.Png.PngFormat.Instance);
 			}
@@ -82,6 +89,7 @@ namespace papyruscompendium.dev.Pages
 
 		public void OnGet()
 		{
+
 		}
 	}
 }
