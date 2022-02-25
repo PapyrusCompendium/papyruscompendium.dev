@@ -1,2 +1,2 @@
 # papyruscompendium.dev
- Fron end site to showcase my front enf abilities.
+ Fron end site to showcase my front end abilities.
