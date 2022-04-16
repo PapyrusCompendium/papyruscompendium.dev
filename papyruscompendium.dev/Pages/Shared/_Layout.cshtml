@@ -34,10 +34,10 @@
                     </ul>
                     @if (!ViewContext.View.Path.Contains("GoogleTrendSearch", StringComparison.OrdinalIgnoreCase))
                     {
-                    <form asp-antiforgery="true" class="d-flex" action="/Widgets/GoogleTrend" method="post" id="searchForm">
-                        <input type="text" class="form-control" name="searchQuery" id="trendQuery" placeholder="Google Trend Query">
-                        <button class="btn btn-outline-primary" type="submit">Search</button>
-                    </form>
+                        <form asp-antiforgery="true" class="d-flex" action="/Widgets/GoogleTrend" method="post" id="searchForm">
+                            <input type="text" class="form-control" name="searchQuery" id="trendQuery" placeholder="Google Trend Query">
+                            <button class="btn btn-outline-primary" type="submit">Search</button>
+                        </form>
                     }
                 </div>
             </div>
@@ -60,6 +60,9 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 
     <script>
         $(document).ready(function () {
