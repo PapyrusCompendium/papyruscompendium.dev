@@ -13,20 +13,16 @@ using SteganographyLibrary;
 using SteganographyLibrary.Exceptions;
 
 namespace papyruscompendium.dev.Pages.Widgets {
+    [BindProperties]
     public class SteganographyModel : PageModel {
-        [BindProperty]
         public string DecodedMessage { get; set; }
 
-        [BindProperty]
         public string Message { get; set; }
 
-        [BindProperty]
         public string Password { get; set; }
 
-        [BindProperty]
         public IFormFile UploadedImage { get; set; }
 
-        [BindProperty]
         public string UploadedImageSource { get; set; }
 
         public async Task OnPostAsync() {

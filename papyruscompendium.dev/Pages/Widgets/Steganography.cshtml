@@ -12,16 +12,16 @@
 </p>
 
 
-<div class="align-content-center">
-    <form method="post" enctype="multipart/form-data">
+<div class="text-center g-3">
+    <form class="row g-3" method="post" enctype="multipart/form-data">
         <input type="file" asp-for="UploadedImage" />
-        <input type="text" asp-for="Message" class="input-group-text" placeholder="Encoded Message" />
-        <input type="text" asp-for="Password" class="input-group-text" placeholder="Password" />
-        <button type="submit" formaction="?Action=Encode">
+        <input type="text" asp-for="Message" class="form-control" placeholder="Encoded Message" />
+        <input type="text" asp-for="Password" class="form-control" placeholder="Password" />
+        <button class="btn btn-primary mb-3 w-50" type="submit" formaction="?Action=Encode">
             Encode Message
         </button>
 
-        <button type="submit" formaction="?Action=Decode">
+        <button class="btn btn-primary mb-3 w-50" type="submit" formaction="?Action=Decode">
             Decode Message
         </button>
     </form>
@@ -29,7 +29,7 @@
     <hr />
 
     <h4>Selected Image:</h4>
-    <img src="@Model.UploadedImageSource" height="500" />
+    <img src="@Model.UploadedImageSource" style="height:500px" />
     <br />
 
     <h4>Message: @displayMessage</h4>
