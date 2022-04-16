@@ -5,13 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="GoogleTrendsDotNet" Version="1.0.20" />
     <PackageReference Include="SixLabors.ImageSharp" Version="2.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="SteganographyLibrary">
-      <HintPath>..\..\GitHub\Steganography-Library\SteganographyLibrary\bin\Release\netstandard2.1\SteganographyLibrary.dll</HintPath>
-    </Reference>
+    <PackageReference Include="SteganographyLibrary" Version="1.0.2" />
   </ItemGroup>
 
 </Project>

@@ -6,6 +6,8 @@
     <title>@ViewData["Title"] - papyruscompendium.dev</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    @Html.AntiForgeryToken()
 </head>
 <body>
     <header>
@@ -21,14 +23,20 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" href="https://github.com/PapyrusCompendium">Github</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Steganography">Steganography</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Widgets/Steganography">Steganography</a>
                         </li>
                     </ul>
+
+                    <form asp-antiforgery="true" class="d-flex" action="/Widgets/GoogleTrend" method="post" id="searchForm">
+                        <input type="text" class="form-control" name="searchQuery" id="trendQuery" placeholder="Google Trend Query">
+                        <button class="btn btn-outline-primary" type="submit">Search</button>
+                    </form>
                 </div>
             </div>
         </nav>
@@ -48,14 +56,45 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="~/js/parallax.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#trendQuery").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '/api/AutoCompleteQuery',
+                        headers: {
+                            "RequestVerificationToken":
+                                $('input[name="__RequestVerificationToken"]').val()
+                        },
+                        data: { "searchQuery": request.term },
+                        dataType: "json",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return item;
+                            }))
+                        },
+                        failure: function (response) {
+                            alert("failure " + response.responseText);
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    event.preventDefault();
 
-    <link rel="stylesheet"
-          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
+                    const regexp = /^(\(\)|\(.+?\)) (.+)$/g;
+                    const regexMatches = [...ui.item.value.matchAll(regexp)][0];
+                    console.log(regexMatches[2]);
+                    $("#trendQuery").val(regexMatches[2]);
+                    $("#searchForm").submit();
+                },
+                minLength: 1,
+                delay: 0
+            });
+        });
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -1,5 +1,5 @@
 ﻿@page
-@model papyruscompendium.dev.Pages.SteganographyModel
+@model papyruscompendium.dev.Pages.Widgets.SteganographyModel
 @{
     var action = Request.Query["Action"];
     var displayMessage = action == "Decode" ? Model.DecodedMessage : Model.Message;
