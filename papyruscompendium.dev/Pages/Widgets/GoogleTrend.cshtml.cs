@@ -37,5 +37,9 @@ namespace papyruscompendium.dev.Pages.Widgets {
 
             return Page();
         }
+
+        public IActionResult OnGet() {
+            return Redirect("/Widgets/GoogleTrendSearch");
+        }
     }
 }

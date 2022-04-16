@@ -31,12 +31,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Widgets/Steganography">Steganography</a>
                         </li>
-                    </ul>
 
-                    <form asp-antiforgery="true" class="d-flex" action="/Widgets/GoogleTrend" method="post" id="searchForm">
-                        <input type="text" class="form-control" name="searchQuery" id="trendQuery" placeholder="Google Trend Query">
-                        <button class="btn btn-outline-primary" type="submit">Search</button>
-                    </form>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Widgets/GoogleTrendSearch">Google Trends Api</a>
+                        </li>
+                    </ul>
+                    @if (!ViewContext.View.Path.Contains("GoogleTrendSearch", StringComparison.OrdinalIgnoreCase))
+                    {
+                        <form asp-antiforgery="true" class="d-flex" action="/Widgets/GoogleTrend" method="post" id="searchForm">
+                            <input type="text" class="form-control" name="searchQuery" id="trendQuery" placeholder="Google Trend Query">
+                            <button class="btn btn-outline-primary" type="submit">Search</button>
+                        </form>
+                    }
                 </div>
             </div>
         </nav>
