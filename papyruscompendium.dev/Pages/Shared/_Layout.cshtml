@@ -21,10 +21,6 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-
-                        <li class="nav-item">
                             <a class="nav-link text-dark" href="https://github.com/PapyrusCompendium">Github</a>
                         </li>
 
@@ -38,10 +34,10 @@
                     </ul>
                     @if (!ViewContext.View.Path.Contains("GoogleTrendSearch", StringComparison.OrdinalIgnoreCase))
                     {
-                        <form asp-antiforgery="true" class="d-flex" action="/Widgets/GoogleTrend" method="post" id="searchForm">
-                            <input type="text" class="form-control" name="searchQuery" id="trendQuery" placeholder="Google Trend Query">
-                            <button class="btn btn-outline-primary" type="submit">Search</button>
-                        </form>
+                    <form asp-antiforgery="true" class="d-flex" action="/Widgets/GoogleTrend" method="post" id="searchForm">
+                        <input type="text" class="form-control" name="searchQuery" id="trendQuery" placeholder="Google Trend Query">
+                        <button class="btn btn-outline-primary" type="submit">Search</button>
+                    </form>
                     }
                 </div>
             </div>
